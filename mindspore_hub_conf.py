@@ -70,9 +70,9 @@ if __name__ == "__main__":
 
     data_path = "./data/"
     data_infer_path = os.path.join(data_path, "infer")
-    print(data_infer_path)
+    print("data_path", data_infer_path)
     dataset = create_dataset_imagenet(data_infer_path)
-    print("Create Dataset Sucessfully!", dataset.get_batch_size())
+    print("Create Dataset Sucessfully!", "Dataset Size:", dataset.get_batch_size())
     model = TinyDarkNetImageNet(pretrained=True)
     print("Create Model Sucessfully!")
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         prob = model.infer(image)
         label = np.argmax(prob.asnumpy(), axis=1)
 
-        # `data_path`路径下要有`ILSVRC2012_devkit_t12.zip`文件
+        # `data_path`路径下要有`ILSVRC2012_devkit_t12`文件夹
         mapping = index2label(data_path)
         output = {int(label): mapping[int(label)]}
-        print(output)
+        print("output:", output)
